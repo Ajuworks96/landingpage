@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 90" width="190" height="45">
+  <!-- G3 Icon Mark -->
+  <g fill="currentColor">
+    <!-- Outer stylized G shape -->
+    <path d="M42,12 C24.3,12 10,26.3 10,44 C10,61.7 24.3,76 42,76 C55.5,76 66.8,67.6 71.3,55.5 L55,55.5 C52,60.5 47.4,63.5 42,63.5 C31.2,63.5 22.5,54.8 22.5,44 C22.5,33.2 31.2,24.5 42,24.5 C47.2,24.5 51.8,26.5 55.2,29.8 L64,21 C58.3,15.3 50.6,12 42,12 Z"/>
+    <path d="M45,44 L74,44 C74.8,44 75.5,44.7 75.5,45.5 C75.5,62 62,75.5 45.5,75.5 C43,75.5 41,73.5 41,71 C41,68.5 43,66.5 45.5,66.5 C57,66.5 66.5,57 66.5,45.5 L45,45.5 L45,44 Z"/>
+    <!-- Diamond Star inside top loop of G -->
+    <path d="M42,23 C43,29 47,33 53,34 C47,35 43,39 42,45 C41,39 37,35 31,34 C37,33 41,29 42,23 Z" fill="#C5A059"/>
+  </g>
+
+  <!-- G3 Bold Text -->
+  <text x="88" y="55" font-family="'Poppins', sans-serif" font-weight="900" font-size="42" fill="currentColor" letter-spacing="-1">G3</text>
+  
+  <!-- Vertical Divider Line -->
+  <line x1="150" y1="18" x2="150" y2="68" stroke="currentColor" stroke-width="2" opacity="0.4"/>
+  
+  <!-- Facilities Management Text Stack -->
+  <text x="164" y="38" font-family="'Poppins', sans-serif" font-weight="800" font-size="21" fill="currentColor" letter-spacing="1">FACILITIES</text>
+  <text x="164" y="58" font-family="'Poppins', sans-serif" font-weight="700" font-size="16" fill="currentColor" letter-spacing="0.8">MANAGEMENT LLC</text>
+  
+  <!-- Experience Better Tagline -->
+  <line x1="164" y1="68" x2="195" y2="68" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+  <text x="202" y="72" font-family="'Helvetica Neue', sans-serif" font-weight="600" font-size="10.5" fill="currentColor" letter-spacing="1.2" opacity="0.9">Experience Better</text>
+  <line x1="315" y1="68" x2="346" y2="68" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+</svg>
