@@ -2661,99 +2661,106 @@ main, header, footer {
 }
 
 /* --------------------------------------------------------------------------
-   Hero Commercial Trust Strip (Sleek, Proportional, 5 Items, Zero Bulk)
+   Ultra-Premium 5-Pillar Architectural Credibility Strip
    -------------------------------------------------------------------------- */
-.hero-commercial-trust {
+.hero-trust-metrics-luxury {
   width: 100%;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
-  gap: 10px 14px;
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(226, 232, 240, 0.9);
-  border-top: 3px solid var(--color-gold);
-  border-radius: 12px;
-  padding: 10px 14px;
+  background: rgba(15, 23, 42, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(212, 175, 55, 0.45);
+  border-radius: 14px;
+  padding: 12px 14px;
   margin-top: 20px;
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.trust-pill-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+.hero-trust-metrics-luxury:hover {
+  border-color: rgba(212, 175, 55, 0.7);
+  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
 }
 
-.trust-mini-icon {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.trust-mini-icon.amber {
-  background: #FEF3C7;
-  border: 1px solid #FDE68A;
-}
-
-.trust-mini-icon.google {
-  background: #FFFFFF;
-  border: 1px solid #E2E8F0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-
-.trust-mini-icon.blue {
-  background: #EFF6FF;
-  border: 1px solid #BFDBFE;
-  color: #2563EB;
-}
-
-.trust-mini-icon.green {
-  background: #ECFDF5;
-  border: 1px solid #A7F3D0;
-  color: #059669;
-}
-
-.trust-mini-icon.indigo {
-  background: #EEF2FF;
-  border: 1px solid #C7D2FE;
-  color: #4F46E5;
-}
-
-.trust-mini-content {
+.luxury-metric-item {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2px 4px;
 }
 
-.trust-mini-val {
+.metric-val-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin-bottom: 3px;
+}
+
+.metric-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #34D399;
+  box-shadow: 0 0 8px #34D399;
+  animation: pulse-dot 2s infinite ease-in-out;
+}
+
+.metric-star {
+  color: #F59E0B;
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
+.metric-val {
   font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 0.84rem;
-  color: #0F172A;
-  line-height: 1.15;
+  font-weight: 800;
+  font-size: 0.98rem;
+  color: #FFFFFF;
+  line-height: 1.1;
+  letter-spacing: -0.2px;
   white-space: nowrap;
 }
 
-.trust-mini-lbl {
-  font-size: 0.68rem;
-  font-weight: 500;
-  color: #64748B;
+.metric-val.metric-speed {
+  color: #38BDF8;
+}
+
+.metric-lbl {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.62rem;
+  font-weight: 600;
+  color: #94A3B8;
   line-height: 1.15;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.metric-lbl span {
   white-space: nowrap;
+}
+
+.metric-v-divider {
+  width: 1px;
+  height: 28px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.04) 100%);
+  margin: 0 4px;
 }
 
 @media (max-width: 600px) {
-  .hero-commercial-trust {
+  .hero-trust-metrics-luxury {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    padding: 12px;
+    gap: 12px;
+    padding: 14px;
+  }
+  .metric-v-divider {
+    display: none;
   }
 }
 
