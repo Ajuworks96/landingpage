@@ -270,6 +270,9 @@ export async function submitLeadToGoogleSheet(leadPayload) {
       params.append('utm_term', leadPayload.utm_term || '');
       params.append('utm_content', leadPayload.utm_content || '');
       params.append('source', leadPayload.source || 'form');
+      if (leadPayload.sheet_name) params.append('sheet_name', leadPayload.sheet_name);
+      if (leadPayload.tab_name) params.append('tab_name', leadPayload.tab_name);
+      if (leadPayload.gid) params.append('gid', String(leadPayload.gid));
 
       // Dispatch a single reliable HTTP POST with keepalive: true
       await fetch(CAMPAIGN_CONFIG.GOOGLE_SHEET_WEBHOOK_URL, {

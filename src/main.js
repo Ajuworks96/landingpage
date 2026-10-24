@@ -112,11 +112,12 @@ function initHeroInlineForm() {
 
     const formData = new FormData(heroForm);
     const trackingData = getAdTrackingData();
+    const isCommercial = !!document.getElementById('heroCompany') || window.location.pathname.includes('commercial');
     const leadPayload = {
       name: formData.get('name'),
       company: formData.get('company') || formData.get('company_name') || '',
       phone: formData.get('phone'),
-      service: formData.get('service') || 'Commercial AC Duct Cleaning',
+      service: formData.get('service') || (isCommercial ? 'Commercial AC Duct Cleaning' : 'Villa & Apartment Deep Clean'),
       property_type: formData.get('property_type') || '',
       approx_area: formData.get('approx_area') || formData.get('area') || '',
       community: formData.get('community') || formData.get('location') || '',
@@ -130,7 +131,9 @@ function initHeroInlineForm() {
       utm_campaign: formData.get('utm_campaign') || trackingData.utm_campaign || 'none',
       utm_term: trackingData.utm_term || '',
       utm_content: trackingData.utm_content || '',
-      source: 'hero_inline_form'
+      source: 'hero_inline_form',
+      sheet_name: isCommercial ? 'AC Duct Cleaning Leads' : 'Deep Cleaning Leads',
+      gid: isCommercial ? '803808413' : '0'
     };
 
     trackEvent('lead_form_submit', leadPayload);
@@ -234,11 +237,12 @@ function initLeadModal() {
 
       const formData = new FormData(leadForm);
       const trackingData = getAdTrackingData();
+      const isCommercial = !!leadForm.querySelector('#leadCompany') || window.location.pathname.includes('commercial');
       const leadPayload = {
         name: formData.get('name'),
         company: formData.get('company') || formData.get('company_name') || '',
         phone: formData.get('phone'),
-        service: formData.get('service') || 'Commercial AC Duct Cleaning',
+        service: formData.get('service') || (isCommercial ? 'Commercial AC Duct Cleaning' : 'Villa & Apartment Deep Clean'),
         property_type: formData.get('property_type') || '',
         approx_area: formData.get('approx_area') || formData.get('area') || '',
         community: formData.get('community') || formData.get('location') || '',
@@ -252,7 +256,9 @@ function initLeadModal() {
         utm_campaign: formData.get('utm_campaign') || trackingData.utm_campaign || 'none',
         utm_term: trackingData.utm_term || '',
         utm_content: trackingData.utm_content || '',
-        source: 'modal_drawer_form'
+        source: 'modal_drawer_form',
+        sheet_name: isCommercial ? 'AC Duct Cleaning Leads' : 'Deep Cleaning Leads',
+        gid: isCommercial ? '803808413' : '0'
       };
 
       trackEvent('lead_form_submit', leadPayload);
