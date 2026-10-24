@@ -2561,6 +2561,14 @@ main, header, footer {
   color: #E2E8F0;
 }
 
+.desktop-banner-text {
+  display: inline;
+}
+
+.mobile-banner-text {
+  display: none;
+}
+
 .commercial-banner-badge {
   display: inline-flex;
   align-items: center;
@@ -2622,6 +2630,12 @@ main, header, footer {
   .commercial-banner-content {
     justify-content: center;
     font-size: 0.76rem;
+  }
+  .desktop-banner-text {
+    display: none;
+  }
+  .mobile-banner-text {
+    display: inline;
   }
 }
 
@@ -2761,6 +2775,9 @@ main, header, footer {
   }
   .metric-v-divider {
     display: none;
+  }
+  .metric-item-sla {
+    grid-column: span 2;
   }
 }
 
