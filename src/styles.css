@@ -2622,20 +2622,28 @@ main, header, footer {
 
 @media (max-width: 680px) {
   .commercial-bar-container {
-    flex-direction: column;
-    text-align: center;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
     gap: 8px;
-    padding: 6px 0;
+    padding: 3px 0;
   }
   .commercial-banner-content {
-    justify-content: center;
-    font-size: 0.76rem;
+    justify-content: flex-start;
+    font-size: 0.74rem;
+    line-height: 1.25;
   }
   .desktop-banner-text {
     display: none;
   }
   .mobile-banner-text {
     display: inline;
+  }
+  .commercial-banner-cta-btn {
+    font-size: 0.72rem;
+    padding: 4px 10px;
+    flex-shrink: 0;
   }
 }
 
