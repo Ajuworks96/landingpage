@@ -7,7 +7,7 @@ export const CAMPAIGN_CONFIG = {
   // Google Sheet Integration
   GOOGLE_SHEET_ID: "1CH_niZPYqwMc8gee07HyCpOXoRqJzRCd7_4Ih7kTU2A",
   GOOGLE_SHEET_URL: "https://docs.google.com/spreadsheets/d/1CH_niZPYqwMc8gee07HyCpOXoRqJzRCd7_4Ih7kTU2A/edit?usp=sharing",
-  GOOGLE_SHEET_WEBHOOK_URL: "https://script.google.com/macros/s/AKfycbwb8L7yqH5NrKUj9g287YPF568ecCgfMD89X9Y8Qr7OxgaJev4LeVEm7WgNFKk6EtaM/exec",
+  GOOGLE_SHEET_WEBHOOK_URL: "https://script.google.com/macros/s/AKfycbyXzv-yjq9h3z4qJAW8wRDbcilpBBa7DeTKsvaXQ4hUUluOWlBvjp83F6VcB46dRsVE/exec",
 
   // WhatsApp Configuration
   WHATSAPP_NUMBER: "+971564654450", // Client's active WhatsApp business number
@@ -250,16 +250,18 @@ export async function submitLeadToGoogleSheet(leadPayload) {
       const safePhone = rawPhone.replace(/^\+/, '');
 
       const params = new URLSearchParams();
+      // Match all 14 requested columns: Timestamp, name, company, phone, service, property_type, approx_area, community, preferred_date, source, gclid, utm_source, utm_medium, utm_campaign
       params.append('Timestamp', timestampVal);
       params.append('timestamp', timestampVal);
       params.append('name', leadPayload.name || '');
-      if (leadPayload.company) params.append('company', leadPayload.company);
+      params.append('company', leadPayload.company || '');
       params.append('phone', safePhone);
-      params.append('service', leadPayload.service || 'Villa & Apartment Deep Clean');
-      if (leadPayload.property_type) params.append('property_type', leadPayload.property_type);
-      if (leadPayload.approx_area) params.append('approx_area', leadPayload.approx_area);
+      params.append('service', leadPayload.service || 'Commercial AC Duct Cleaning');
+      params.append('property_type', leadPayload.property_type || '');
+      params.append('approx_area', leadPayload.approx_area || '');
       params.append('community', leadPayload.community || '');
       params.append('preferred_date', leadPayload.preferred_date || '');
+      params.append('source', leadPayload.source || 'hero_inline_form');
       params.append('gclid', gclidVal);
       params.append('GCLID', gclidVal);
       params.append('wbraid', leadPayload.wbraid || '');
@@ -269,7 +271,6 @@ export async function submitLeadToGoogleSheet(leadPayload) {
       params.append('utm_campaign', leadPayload.utm_campaign || 'none');
       params.append('utm_term', leadPayload.utm_term || '');
       params.append('utm_content', leadPayload.utm_content || '');
-      params.append('source', leadPayload.source || 'form');
       if (leadPayload.sheet_name) params.append('sheet_name', leadPayload.sheet_name);
       if (leadPayload.tab_name) params.append('tab_name', leadPayload.tab_name);
       if (leadPayload.gid) params.append('gid', String(leadPayload.gid));
