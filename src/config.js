@@ -7,7 +7,7 @@ export const CAMPAIGN_CONFIG = {
   // Google Sheet Integration
   GOOGLE_SHEET_ID: "1CH_niZPYqwMc8gee07HyCpOXoRqJzRCd7_4Ih7kTU2A",
   GOOGLE_SHEET_URL: "https://docs.google.com/spreadsheets/d/1CH_niZPYqwMc8gee07HyCpOXoRqJzRCd7_4Ih7kTU2A/edit?usp=sharing",
-  GOOGLE_SHEET_WEBHOOK_URL: "https://script.google.com/macros/s/AKfycbyXzv-yjq9h3z4qJAW8wRDbcilpBBa7DeTKsvaXQ4hUUluOWlBvjp83F6VcB46dRsVE/exec",
+  GOOGLE_SHEET_WEBHOOK_URL: "https://script.google.com/macros/s/AKfycbwlS4rsf0IpI6hJ4nzcb-mSGtfna0zy8lZdNjJpQk5RLo2m2GJRpk0TEDB0TlvcqsI/exec",
 
   // WhatsApp Configuration
   WHATSAPP_NUMBER: "+971564654450", // Client's active WhatsApp business number
