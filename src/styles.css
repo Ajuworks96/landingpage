@@ -601,8 +601,20 @@ main, header, footer {
 }
 
 .duct-hero-parallax-bg {
-  background: linear-gradient(135deg, rgba(15, 23, 42, 0.82) 0%, rgba(15, 23, 42, 0.60) 50%, rgba(15, 23, 42, 0.80) 100%),
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.78) 0%, rgba(15, 23, 42, 0.50) 50%, rgba(15, 23, 42, 0.75) 100%),
               url('/commercial-ac-duct-hero-bg.jpg') center/cover no-repeat;
+}
+
+@media (max-width: 768px) {
+  .hero-section .hero-parallax-bg {
+    top: 0;
+    height: 100%;
+  }
+
+  .duct-hero-parallax-bg {
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.46) 0%, rgba(15, 23, 42, 0.26) 38%, rgba(15, 23, 42, 0.72) 100%),
+                url('/commercial-ac-duct-hero-bg.jpg') 52% 12% / cover no-repeat !important;
+  }
 }
 
 .hero-section .container {

@@ -56,6 +56,7 @@ function initParallaxScroll() {
   let ticking = false;
 
   window.addEventListener('scroll', () => {
+    if (window.innerWidth <= 768) return;
     if (!ticking) {
       window.requestAnimationFrame(() => {
         const scrolled = window.scrollY;
