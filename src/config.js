@@ -167,9 +167,9 @@ function getGclidFromGtmCookie() {
  */
 export function getAdTrackingData() {
   // Check URL or GTM Cookie for Click IDs
-  const freshGclid = getQueryOrHashParam(['gclid', 'gbraid', 'wbraid', 'dclid', 'msclkid', 'fbclid']) || getGclidFromGtmCookie();
-  const freshWbraid = getQueryOrHashParam(['wbraid']);
-  const freshGbraid = getQueryOrHashParam(['gbraid']);
+  const freshGclid = getQueryOrHashParam(['gclid', 'GCLID', 'dclid', 'msclkid', 'fbclid']) || getGclidFromGtmCookie();
+  const freshWbraid = getQueryOrHashParam(['wbraid', 'WBRAID']);
+  const freshGbraid = getQueryOrHashParam(['gbraid', 'GBRAID']);
   const freshUtmSource = getQueryOrHashParam(['utm_source', 'source']);
   const freshUtmMedium = getQueryOrHashParam(['utm_medium', 'medium']);
   const freshUtmCampaign = getQueryOrHashParam(['utm_campaign', 'campaign']);
@@ -184,9 +184,13 @@ export function getAdTrackingData() {
   }
   if (freshWbraid) {
     try { localStorage.setItem('g3_wbraid', freshWbraid); } catch (e) {}
+    try { sessionStorage.setItem('g3_wbraid', freshWbraid); } catch (e) {}
+    setCookie('g3_wbraid', freshWbraid);
   }
   if (freshGbraid) {
     try { localStorage.setItem('g3_gbraid', freshGbraid); } catch (e) {}
+    try { sessionStorage.setItem('g3_gbraid', freshGbraid); } catch (e) {}
+    setCookie('g3_gbraid', freshGbraid);
   }
   if (freshUtmSource) {
     try { localStorage.setItem('g3_utm_source', freshUtmSource); } catch (e) {}
@@ -204,17 +208,20 @@ export function getAdTrackingData() {
   }
 
   // Retrieve with hierarchical fallbacks
-  const gclid = freshGclid || localStorage.getItem('g3_gclid') || sessionStorage.getItem('g3_gclid') || getCookie('g3_gclid') || '';
-  const wbraid = freshWbraid || localStorage.getItem('g3_wbraid') || '';
-  const gbraid = freshGbraid || localStorage.getItem('g3_gbraid') || '';
-  const utmSource = freshUtmSource || localStorage.getItem('g3_utm_source') || sessionStorage.getItem('g3_utm_source') || getCookie('g3_utm_source') || (gclid ? 'google_ads' : 'direct');
-  const utmMedium = freshUtmMedium || localStorage.getItem('g3_utm_medium') || sessionStorage.getItem('g3_utm_medium') || getCookie('g3_utm_medium') || (gclid ? 'cpc' : 'none');
+  const storedWbraid = freshWbraid || localStorage.getItem('g3_wbraid') || sessionStorage.getItem('g3_wbraid') || getCookie('g3_wbraid') || '';
+  const storedGbraid = freshGbraid || localStorage.getItem('g3_gbraid') || sessionStorage.getItem('g3_gbraid') || getCookie('g3_gbraid') || '';
+  const rawGclid = freshGclid || localStorage.getItem('g3_gclid') || sessionStorage.getItem('g3_gclid') || getCookie('g3_gclid') || '';
+  const gclid = rawGclid || storedGbraid || storedWbraid || '';
+  const isGoogleAd = !!(rawGclid || storedGbraid || storedWbraid);
+  const utmSource = freshUtmSource || localStorage.getItem('g3_utm_source') || sessionStorage.getItem('g3_utm_source') || getCookie('g3_utm_source') || (isGoogleAd ? 'google_ads' : 'direct');
+  const utmMedium = freshUtmMedium || localStorage.getItem('g3_utm_medium') || sessionStorage.getItem('g3_utm_medium') || getCookie('g3_utm_medium') || (isGoogleAd ? 'cpc' : 'none');
   const utmCampaign = freshUtmCampaign || localStorage.getItem('g3_utm_campaign') || sessionStorage.getItem('g3_utm_campaign') || 'none';
 
   return {
     gclid,
-    wbraid,
-    gbraid,
+    raw_gclid: rawGclid,
+    wbraid: storedWbraid,
+    gbraid: storedGbraid,
     utm_source: utmSource,
     utm_medium: utmMedium,
     utm_campaign: utmCampaign,
@@ -243,7 +250,9 @@ export async function submitLeadToGoogleSheet(leadPayload) {
   if (CAMPAIGN_CONFIG.GOOGLE_SHEET_WEBHOOK_URL) {
     try {
       const timestampVal = leadPayload.timestamp || getUAETimestamp();
-      const gclidVal = leadPayload.gclid || '';
+      const gclidVal = leadPayload.gclid || leadPayload.gbraid || leadPayload.wbraid || '';
+      const gbraidVal = leadPayload.gbraid || '';
+      const wbraidVal = leadPayload.wbraid || '';
 
       // Prevent Google Sheets formula #ERROR! by removing leading '+'
       const rawPhone = (leadPayload.phone || '').trim();
@@ -264,8 +273,10 @@ export async function submitLeadToGoogleSheet(leadPayload) {
       params.append('source', leadPayload.source || 'hero_inline_form');
       params.append('gclid', gclidVal);
       params.append('GCLID', gclidVal);
-      params.append('wbraid', leadPayload.wbraid || '');
-      params.append('gbraid', leadPayload.gbraid || '');
+      params.append('gbraid', gbraidVal);
+      params.append('GBRAID', gbraidVal);
+      params.append('wbraid', wbraidVal);
+      params.append('WBRAID', wbraidVal);
       params.append('utm_source', leadPayload.utm_source || 'direct');
       params.append('utm_medium', leadPayload.utm_medium || 'none');
       params.append('utm_campaign', leadPayload.utm_campaign || 'none');

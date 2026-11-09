@@ -39,7 +39,9 @@
     (function () {
       try {
         var params = new URLSearchParams(window.location.search);
-        var gclid = params.get('gclid') || params.get('GCLID') || params.get('wbraid') || params.get('gbraid') || params.get('dclid');
+        var gclid = params.get('gclid') || params.get('GCLID') || params.get('dclid');
+        var gbraid = params.get('gbraid') || params.get('GBRAID');
+        var wbraid = params.get('wbraid') || params.get('WBRAID');
         var src = params.get('utm_source') || params.get('source');
         var med = params.get('utm_medium') || params.get('medium');
         var cam = params.get('utm_campaign') || params.get('campaign');
@@ -48,6 +50,26 @@
           localStorage.setItem('g3_gclid', gclid);
           sessionStorage.setItem('g3_gclid', gclid);
           document.cookie = "g3_gclid=" + encodeURIComponent(gclid) + ";path=/;max-age=7776000;SameSite=Lax";
+        }
+        if (gbraid) {
+          localStorage.setItem('g3_gbraid', gbraid);
+          sessionStorage.setItem('g3_gbraid', gbraid);
+          document.cookie = "g3_gbraid=" + encodeURIComponent(gbraid) + ";path=/;max-age=7776000;SameSite=Lax";
+          if (!gclid) {
+            localStorage.setItem('g3_gclid', gbraid);
+            sessionStorage.setItem('g3_gclid', gbraid);
+            document.cookie = "g3_gclid=" + encodeURIComponent(gbraid) + ";path=/;max-age=7776000;SameSite=Lax";
+          }
+        }
+        if (wbraid) {
+          localStorage.setItem('g3_wbraid', wbraid);
+          sessionStorage.setItem('g3_wbraid', wbraid);
+          document.cookie = "g3_wbraid=" + encodeURIComponent(wbraid) + ";path=/;max-age=7776000;SameSite=Lax";
+          if (!gclid && !gbraid) {
+            localStorage.setItem('g3_gclid', wbraid);
+            sessionStorage.setItem('g3_gclid', wbraid);
+            document.cookie = "g3_gclid=" + encodeURIComponent(wbraid) + ";path=/;max-age=7776000;SameSite=Lax";
+          }
         }
         if (src) {
           localStorage.setItem('g3_utm_source', src);
@@ -242,6 +264,8 @@
               <form class="lead-form hero-form-inline commercial-lead-form" id="heroInlineForm">
                 <!-- Hidden Ad Tracking & Timestamp Fields -->
                 <input type="hidden" id="heroGclid" name="gclid" value="">
+                <input type="hidden" id="heroGbraid" name="gbraid" value="">
+                <input type="hidden" id="heroWbraid" name="wbraid" value="">
                 <input type="hidden" id="heroTimestamp" name="timestamp" value="">
                 <input type="hidden" id="heroUtmSource" name="utm_source" value="">
                 <input type="hidden" id="heroUtmMedium" name="utm_medium" value="">
@@ -1516,6 +1540,8 @@
       <form class="lead-form" id="leadInspectionForm">
         <!-- Hidden Ad Tracking & Timestamp Fields -->
         <input type="hidden" id="modalGclid" name="gclid" value="">
+        <input type="hidden" id="modalGbraid" name="gbraid" value="">
+        <input type="hidden" id="modalWbraid" name="wbraid" value="">
         <input type="hidden" id="modalTimestamp" name="timestamp" value="">
         <input type="hidden" id="modalUtmSource" name="utm_source" value="">
         <input type="hidden" id="modalUtmMedium" name="utm_medium" value="">

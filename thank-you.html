@@ -131,12 +131,27 @@
   <script>
     // Dispatch Conversion Event for GTM / Google Ads
     window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
-      event: 'conversion',
-      event_category: 'lead',
-      event_action: 'thank_you_page_view',
-      page_type: 'thank_you_page'
-    });
+    (function () {
+      try {
+        var lead = JSON.parse(sessionStorage.getItem('last_submitted_lead') || '{}');
+        window.dataLayer.push({
+          event: 'conversion',
+          event_category: 'lead',
+          event_action: 'thank_you_page_view',
+          page_type: 'thank_you_page',
+          gclid: lead.gclid || localStorage.getItem('g3_gclid') || '',
+          gbraid: lead.gbraid || localStorage.getItem('g3_gbraid') || '',
+          wbraid: lead.wbraid || localStorage.getItem('g3_wbraid') || ''
+        });
+      } catch (e) {
+        window.dataLayer.push({
+          event: 'conversion',
+          event_category: 'lead',
+          event_action: 'thank_you_page_view',
+          page_type: 'thank_you_page'
+        });
+      }
+    })();
 
     document.addEventListener('DOMContentLoaded', () => {
       try {

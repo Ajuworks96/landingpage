@@ -123,9 +123,9 @@ function initHeroInlineForm() {
       approx_area: formData.get('approx_area') || formData.get('area') || '',
       community: formData.get('community') || formData.get('location') || '',
       preferred_date: formData.get('preferred_date'),
-      gclid: formData.get('gclid') || trackingData.gclid || '',
-      wbraid: trackingData.wbraid || '',
-      gbraid: trackingData.gbraid || '',
+      gclid: formData.get('gclid') || trackingData.gclid || trackingData.gbraid || trackingData.wbraid || '',
+      gbraid: formData.get('gbraid') || trackingData.gbraid || '',
+      wbraid: formData.get('wbraid') || trackingData.wbraid || '',
       timestamp: formData.get('timestamp') || getUAETimestamp(),
       utm_source: formData.get('utm_source') || trackingData.utm_source || 'direct',
       utm_medium: formData.get('utm_medium') || trackingData.utm_medium || 'none',
@@ -248,9 +248,9 @@ function initLeadModal() {
         approx_area: formData.get('approx_area') || formData.get('area') || '',
         community: formData.get('community') || formData.get('location') || '',
         preferred_date: formData.get('preferred_date'),
-        gclid: formData.get('gclid') || trackingData.gclid || '',
-        wbraid: trackingData.wbraid || '',
-        gbraid: trackingData.gbraid || '',
+        gclid: formData.get('gclid') || trackingData.gclid || trackingData.gbraid || trackingData.wbraid || '',
+        gbraid: formData.get('gbraid') || trackingData.gbraid || '',
+        wbraid: formData.get('wbraid') || trackingData.wbraid || '',
         timestamp: formData.get('timestamp') || getUAETimestamp(),
         utm_source: formData.get('utm_source') || trackingData.utm_source || 'direct',
         utm_medium: formData.get('utm_medium') || trackingData.utm_medium || 'none',
@@ -517,7 +517,9 @@ function initAdTracking() {
     const tracking = getAdTrackingData();
     const currentTimestamp = getUAETimestamp();
 
-    document.querySelectorAll('input[name="gclid"]').forEach(el => el.value = tracking.gclid || '');
+    document.querySelectorAll('input[name="gclid"]').forEach(el => el.value = tracking.gclid || tracking.gbraid || tracking.wbraid || '');
+    document.querySelectorAll('input[name="gbraid"]').forEach(el => el.value = tracking.gbraid || '');
+    document.querySelectorAll('input[name="wbraid"]').forEach(el => el.value = tracking.wbraid || '');
     document.querySelectorAll('input[name="timestamp"]').forEach(el => el.value = currentTimestamp);
     document.querySelectorAll('input[name="utm_source"]').forEach(el => el.value = tracking.utm_source || 'direct');
     document.querySelectorAll('input[name="utm_medium"]').forEach(el => el.value = tracking.utm_medium || 'none');
