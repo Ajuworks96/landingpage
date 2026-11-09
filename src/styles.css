@@ -605,15 +605,70 @@ main, header, footer {
               url('/commercial-ac-duct-hero-bg.jpg') center/cover no-repeat;
 }
 
+/* ==========================================================================
+   MOBILE HERO MEDIA CARD (Appears FIRST on Phone / Mobile Before Text)
+   ========================================================================== */
+.hero-mobile-media-card {
+  display: none;
+}
+
 @media (max-width: 768px) {
+  .hero-section {
+    padding-top: calc(var(--header-height) + 14px);
+  }
+
   .hero-section .hero-parallax-bg {
     top: 0;
     height: 100%;
+    background: linear-gradient(180deg, #091322 0%, #0F172A 100%) !important;
   }
 
-  .duct-hero-parallax-bg {
-    background: linear-gradient(180deg, rgba(15, 23, 42, 0.46) 0%, rgba(15, 23, 42, 0.26) 38%, rgba(15, 23, 42, 0.72) 100%),
-                url('/commercial-ac-duct-hero-bg.jpg') 52% 12% / cover no-repeat !important;
+  .hero-mobile-media-card {
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: #0B132B;
+  }
+
+  .hero-mobile-media-card .hero-mobile-img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    max-height: 260px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .hero-mobile-img-badge {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    background: rgba(11, 19, 43, 0.90);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(212, 163, 115, 0.45);
+    color: #F8FAFC;
+    font-size: 0.74rem;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  }
+
+  .hero-mobile-img-badge .pulse-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #34D399;
+    box-shadow: 0 0 8px #34D399;
   }
 }
 
