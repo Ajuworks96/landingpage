@@ -250,9 +250,13 @@ export async function submitLeadToGoogleSheet(leadPayload) {
   if (CAMPAIGN_CONFIG.GOOGLE_SHEET_WEBHOOK_URL) {
     try {
       const timestampVal = leadPayload.timestamp || getUAETimestamp();
-      const gclidVal = leadPayload.gclid || leadPayload.gbraid || leadPayload.wbraid || '';
       const gbraidVal = leadPayload.gbraid || '';
       const wbraidVal = leadPayload.wbraid || '';
+      // Dedicated GCLID, separate from GBRAID/WBRAID
+      let gclidVal = leadPayload.raw_gclid || leadPayload.gclid || '';
+      if (gclidVal === gbraidVal || gclidVal === wbraidVal) {
+        gclidVal = leadPayload.raw_gclid || '';
+      }
 
       // Prevent Google Sheets formula #ERROR! by removing leading '+'
       const rawPhone = (leadPayload.phone || '').trim();

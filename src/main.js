@@ -123,7 +123,7 @@ function initHeroInlineForm() {
       approx_area: formData.get('approx_area') || formData.get('area') || '',
       community: formData.get('community') || formData.get('location') || '',
       preferred_date: formData.get('preferred_date'),
-      gclid: formData.get('gclid') || trackingData.gclid || trackingData.gbraid || trackingData.wbraid || '',
+      gclid: formData.get('gclid') || trackingData.raw_gclid || (trackingData.gclid !== trackingData.gbraid && trackingData.gclid !== trackingData.wbraid ? trackingData.gclid : ''),
       gbraid: formData.get('gbraid') || trackingData.gbraid || '',
       wbraid: formData.get('wbraid') || trackingData.wbraid || '',
       timestamp: formData.get('timestamp') || getUAETimestamp(),
@@ -248,7 +248,7 @@ function initLeadModal() {
         approx_area: formData.get('approx_area') || formData.get('area') || '',
         community: formData.get('community') || formData.get('location') || '',
         preferred_date: formData.get('preferred_date'),
-        gclid: formData.get('gclid') || trackingData.gclid || trackingData.gbraid || trackingData.wbraid || '',
+        gclid: formData.get('gclid') || trackingData.raw_gclid || (trackingData.gclid !== trackingData.gbraid && trackingData.gclid !== trackingData.wbraid ? trackingData.gclid : ''),
         gbraid: formData.get('gbraid') || trackingData.gbraid || '',
         wbraid: formData.get('wbraid') || trackingData.wbraid || '',
         timestamp: formData.get('timestamp') || getUAETimestamp(),
@@ -517,7 +517,7 @@ function initAdTracking() {
     const tracking = getAdTrackingData();
     const currentTimestamp = getUAETimestamp();
 
-    document.querySelectorAll('input[name="gclid"]').forEach(el => el.value = tracking.gclid || tracking.gbraid || tracking.wbraid || '');
+    document.querySelectorAll('input[name="gclid"]').forEach(el => el.value = tracking.raw_gclid || (tracking.gclid !== tracking.gbraid && tracking.gclid !== tracking.wbraid ? tracking.gclid : ''));
     document.querySelectorAll('input[name="gbraid"]').forEach(el => el.value = tracking.gbraid || '');
     document.querySelectorAll('input[name="wbraid"]').forEach(el => el.value = tracking.wbraid || '');
     document.querySelectorAll('input[name="timestamp"]').forEach(el => el.value = currentTimestamp);
